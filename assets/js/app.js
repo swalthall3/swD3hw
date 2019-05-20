@@ -60,14 +60,32 @@ function makeResponsive() {
         var xAxis = d3.axisBottom(xLinearScale).ticks();
         var yAxis = d3.axisLeft(yLinearScale).ticks();
   
-        // append axes
+        // append x axis
         chartGroup.append("g")
           .attr("transform", `translate(0, ${height})`)
           .call(xAxis);
   
+        // label x axis
+        chartGroup.append("text")
+            .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.bottom-5) + ")")
+            .style("text-anchor", "middle")
+            .text("Poverty (%)")
+            .attr("font-size", "20");  
+
+        // append y axis
         chartGroup.append("g")
           .call(yAxis);
-  
+        
+        // label y axis
+        chartGroup.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 0 - margin.left)
+            .attr("x",0 - (height / 2))
+            .attr("dy", "1em")
+            .style("text-anchor", "middle")
+            .text("Smoking (%)")
+            .attr("font-size", "20");
+
         // append circles
         var circlesGroup = chartGroup.selectAll("circle")
           .data(healthData)
