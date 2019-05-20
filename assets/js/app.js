@@ -72,22 +72,22 @@ function makeResponsive() {
         var circlesGroup = chartGroup.selectAll("circle")
           .data(healthData)
           .enter()
-          .append("circle").classed("stateCircle", true)
+          .append("circle")
           .attr("cx", d => xLinearScale(d.poverty))
           .attr("cy", d => yLinearScale(d.smokes))
           .attr("r", "12")
-          .append("text").classed("stateText", true)
-          .text(d => d.abbr);
+          .classed("stateCircle", true);
         
         // append state abbreviations
-        // var abbrGroup = chartGroup.selectAll("text")
-        // .data(healthData)
-        // .enter()
-        // .append("text")
-        // .attr("x", d => xLinearScale(d.poverty))
-        // .attr("y", d => yLinearScale(d.smokes))
-        // .text(d => d.abbr)
-        // .classed("stateText", true);  
+        var abbrGroup = chartGroup.selectAll("text")
+        .data(healthData)
+        .enter()
+        .append("text")
+        .attr("x", d => xLinearScale(d.poverty))
+        .attr("y", d => yLinearScale(d.smokes)+4)
+        .attr("font-size", "12")
+        .text(d => d.abbr)
+        .classed("stateText", true);
 
         // Step 1: Initialize Tooltip
         var toolTip = d3.tip()
